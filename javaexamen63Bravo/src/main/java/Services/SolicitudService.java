@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("solicitud")
 public class SolicitudService {
@@ -22,8 +23,8 @@ public class SolicitudService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("agregar")
-	public List<Cuota> agregarSolicitud(Solicitud solicitud) {
+	public Response agregarSolicitud(Solicitud solicitud) {
 		gSolicitud.cuotas(solicitud);
-		return (List<Cuota>) solicitud.getCuotas();
+		return Response.ok(solicitud).build();
 	}
 }
