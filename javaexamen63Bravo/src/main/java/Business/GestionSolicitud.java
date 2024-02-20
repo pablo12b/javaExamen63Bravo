@@ -3,8 +3,6 @@ package Business;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import DAO.CuotaDAO;
 import DAO.SolicitudDAO;
 import Modelo.Cuota;
 import Modelo.Solicitud;
@@ -15,8 +13,6 @@ import jakarta.inject.Inject;
 public class GestionSolicitud {
 	@Inject
 	private SolicitudDAO solicitudDAO;
-	@Inject
-	private CuotaDAO cuotaDAO;
 	
 	public void cuotas(Solicitud solicitud) {
 		List<Cuota> cuotas = new ArrayList<Cuota>();
@@ -25,7 +21,6 @@ public class GestionSolicitud {
 			cuota.setCuotaCapital(solicitud.getMonto() / solicitud.getMeses());
 			cuota.setCuotaInteres(cuota.getCuotaCapital() / 10);
 			cuota.setCuotaTotal(cuota.getCuotaCapital() + cuota.getCuotaInteres());
-			cuotaDAO.insert(cuota);
 			cuotas.add(cuota);
 		}
 		solicitud.setCuotas(cuotas);
